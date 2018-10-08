@@ -15,8 +15,7 @@ export const getContacts = () => dispatch => {
     .catch(err => console.log(err))
 }
 
-export const selectContact = id => dispatch => {
-  dispatch(setContactsLoading())
+export const getSelectedContact = id => dispatch => {
   dispatch({
     type: GET_SELECTED_CONTACT,
     payload: id,

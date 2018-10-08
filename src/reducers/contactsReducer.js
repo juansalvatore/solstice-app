@@ -8,6 +8,7 @@ import { filter, orderBy, isEmpty } from 'lodash'
 const initialState = {
   favoriteContacts: [],
   otherContacts: [],
+  selectedContact: {},
   isLoading: false,
 }
 
@@ -39,7 +40,7 @@ export default (state = initialState, action) => {
         selectedContact: filter(
           [...state.favoriteContacts, ...state.otherContacts],
           contact => contact.id === action.payload
-        ),
+        )[0],
       }
 
     case CONTACTS_LOADING:

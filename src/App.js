@@ -6,6 +6,8 @@ import store from './store'
 
 import Navbar from './components/layout/Navbar'
 import ContactList from './components/contacts/ContactList'
+import Contact from './components/contacts/Contact'
+
 class App extends Component {
   render() {
     return (
@@ -14,6 +16,8 @@ class App extends Component {
           <div>
             <Route exact path="/" component={Navbar} />
             <Route exact path="/" component={ContactList} />
+            <Route exact path="/contact" component={Navbar} />
+            <Route exact path="/contact" component={Contact} />
           </div>
         </Router>
       </Provider>

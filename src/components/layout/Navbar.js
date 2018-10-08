@@ -1,15 +1,32 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
+import { isEmpty } from 'lodash'
+import { Link } from 'react-router-dom'
 
-export default class Navbar extends Component {
+class Navbar extends Component {
   render() {
-    return (
-      <NavbarWrapper>
-        <Title>Contacts</Title>
-      </NavbarWrapper>
+    const isContact = !isEmpty(this.props.contacts.selectedContact)
+
+    const listNav = <Title>Contacts</Title>
+    const contactNav = (
+      <ContactNavWrapper>
+        <Link to="/">{'< Contacts'}</Link>
+        <span>star</span>
+      </ContactNavWrapper>
     )
+    return <NavbarWrapper>{!isContact ? listNav : contactNav}</NavbarWrapper>
   }
 }
+
+const mapStateToProps = state => ({
+  contacts: state.contacts,
+})
+
+export default connect(
+  mapStateToProps,
+  null
+)(Navbar)
 
 const NavbarWrapper = styled.div`
   display: flex;
@@ -25,4 +42,11 @@ const Title = styled.h1`
   display: flex;
   justify-content: center;
   font-size: 18px;
+`
+const ContactNavWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  justify-content: space-between;
 `

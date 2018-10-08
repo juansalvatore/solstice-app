@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getContacts, selectContact } from '../../actions/contactActions'
+import { NavLink } from 'react-router-dom'
+import { getContacts, getSelectedContact } from '../../actions/contactActions'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import ContactItem from './ContactItem'
@@ -14,14 +15,15 @@ class ContactList extends Component {
     const favoriteContacts = this.props.contacts.favoriteContacts
 
     return favoriteContacts.map((contact, i) => (
-      <ContactItem
-        key={i}
-        favorite={true}
-        contact={contact}
-        i={i}
-        data={favoriteContacts}
-        onClick={() => this.props.selectContact(contact.id)}
-      />
+      <NavLink to="/contact" key={i}>
+        <ContactItem
+          favorite={true}
+          contact={contact}
+          i={i}
+          data={favoriteContacts}
+          selectContact={() => this.props.getSelectedContact(contact.id)}
+        />
+      </NavLink>
     ))
   }
 
@@ -29,13 +31,14 @@ class ContactList extends Component {
     const otherContacts = this.props.contacts.otherContacts
 
     return otherContacts.map((contact, i) => (
-      <ContactItem
-        key={i}
-        contact={contact}
-        i={i}
-        data={otherContacts}
-        onClick={() => this.props.selectContact(contact.id)}
-      />
+      <NavLink to="/contact" key={i}>
+        <ContactItem
+          contact={contact}
+          i={i}
+          data={otherContacts}
+          selectContact={() => this.props.getSelectedContact(contact.id)}
+        />
+      </NavLink>
     ))
   }
 
@@ -53,7 +56,7 @@ class ContactList extends Component {
 
 ContactList.propTypes = {
   getContacts: PropTypes.func.isRequired,
-  selectContact: PropTypes.func.isRequired,
+  getSelectedContact: PropTypes.func.isRequired,
   contacts: PropTypes.object.isRequired,
 }
 
@@ -63,7 +66,7 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getContacts, selectContact }
+  { getContacts, getSelectedContact }
 )(ContactList)
 
 const ContactListWrapper = styled.div`

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 export default ({ contact, i, data, favorite, selectContact }) => {
   return (
-    <div>
+    <div onClick={() => selectContact(contact.id)}>
       <ContactItemWrapper>
         <ContactImage img={contact.smallImageURL} />
         <ContactTextContainer>
@@ -28,7 +28,7 @@ export default ({ contact, i, data, favorite, selectContact }) => {
 // ContactItem style
 const ContactItemWrapper = styled.div`
   display: flex;
-  padding: 23px;
+  padding: 20px;
   cursor: pointer;
   transition: all ease-in-out 200ms;
 
