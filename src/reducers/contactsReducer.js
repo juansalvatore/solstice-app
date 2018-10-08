@@ -2,8 +2,9 @@ import {
   GET_CONTACTS,
   CONTACTS_LOADING,
   GET_SELECTED_CONTACT,
+  TOGGLE_FAVORITE,
 } from '../actions/types'
-import { filter, orderBy, isEmpty } from 'lodash'
+import { filter, orderBy, isEmpty, find } from 'lodash'
 
 const initialState = {
   favoriteContacts: [],
@@ -46,6 +47,30 @@ export default (state = initialState, action) => {
 
     case CONTACTS_LOADING:
       return { ...state, isLoading: true }
+
+    case TOGGLE_FAVORITE:
+      const favorite = state.favoriteContacts.filter(
+        contact => contact.id === action.payload
+      )[0]
+      // Check if it's in favorites
+      if (typeof favorite !== 'undefined') {
+        const newOther = { ...favorite, isFavorite: !favorite.isFavorite }
+        const newState = {
+          ...state,
+          otherContacts: orderBy(
+            [...state.otherContacts, newOther],
+            'id',
+            'dec'
+          ),
+          favoriteContacts: state.favoriteContacts.filter(
+            contact => contact.id !== action.payload
+          ),
+        }
+        console.log(newState)
+      } else {
+      }
+
+    // Check if it's in others
 
     default:
       return state

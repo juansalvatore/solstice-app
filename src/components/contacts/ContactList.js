@@ -5,6 +5,9 @@ import { getContacts, getSelectedContact } from '../../actions/contactActions'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import ContactItem from './ContactItem'
+import ContentLoader from 'react-content-loader'
+
+import Fade from 'react-reveal/Fade'
 
 class ContactList extends Component {
   componentDidMount() {
@@ -43,12 +46,52 @@ class ContactList extends Component {
   }
 
   render() {
+    const loader = (
+      <ContentLoader
+        height={90}
+        speed={1}
+        primaryColor={'rgba(0,0,0,0.05)'}
+        secondaryColor={'rgba(0,0,0,0.08)'}
+        style={{ paddingLeft: '20px', paddingTop: '20px', width: '370px' }}
+      >
+        {/* Pure SVG */}
+        <rect x="0" y="0" rx="5" ry="5" width="70" height="70" />
+        <rect x="90" y="17" rx="4" ry="4" width="250" height="13" />
+        <rect x="90" y="45" rx="3" ry="3" width="200" height="10" />
+      </ContentLoader>
+    )
+
     return (
       <ContactListWrapper>
         <ContactsDivisor>Favorite contacts</ContactsDivisor>
-        {this.displayFavoriteContacts()}
+        {this.props.contacts.isLoading ? (
+          <div>
+            {loader}
+            <br />
+            {loader}
+            <br />
+            {loader}
+          </div>
+        ) : (
+          <Fade>
+            <div>{this.displayFavoriteContacts()}</div>
+          </Fade>
+        )}
+
         <ContactsDivisor>Other contacts</ContactsDivisor>
-        {this.displayOtherContacts()}
+        {this.props.contacts.isLoading ? (
+          <div>
+            {loader}
+            <br />
+            {loader}
+            <br />
+            {loader}
+          </div>
+        ) : (
+          <Fade>
+            <div>{this.displayOtherContacts()}</div>
+          </Fade>
+        )}
       </ContactListWrapper>
     )
   }

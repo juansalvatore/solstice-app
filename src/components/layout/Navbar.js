@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { isEmpty } from 'lodash'
 import { Link } from 'react-router-dom'
+import { toggleFavorite } from '../../actions/contactActions'
 
 class Navbar extends Component {
   render() {
@@ -12,7 +13,7 @@ class Navbar extends Component {
     const contactNav = (
       <ContactNavWrapper>
         <Link to="/">{'< Contacts'}</Link>
-        <span>star</span>
+        <span onClick={() => this.props.toggleFavorite('100')}>star</span>
       </ContactNavWrapper>
     )
     return <NavbarWrapper>{!isContact ? listNav : contactNav}</NavbarWrapper>
@@ -25,7 +26,7 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  null
+  { toggleFavorite }
 )(Navbar)
 
 const NavbarWrapper = styled.div`

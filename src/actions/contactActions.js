@@ -1,4 +1,9 @@
-import { GET_CONTACTS, CONTACTS_LOADING, GET_SELECTED_CONTACT } from './types'
+import {
+  GET_CONTACTS,
+  CONTACTS_LOADING,
+  GET_SELECTED_CONTACT,
+  TOGGLE_FAVORITE,
+} from './types'
 import axios from 'axios'
 
 // Get contacts list
@@ -22,6 +27,14 @@ export const getSelectedContact = id => dispatch => {
     payload: id,
   })
 }
+
+export const toggleFavorite = id => dispatch => {
+  dispatch({
+    type: TOGGLE_FAVORITE,
+    payload: id,
+  })
+}
+
 // Set isLoading to true
 const setContactsLoading = () => dispatch => {
   dispatch({

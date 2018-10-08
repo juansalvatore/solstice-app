@@ -4,8 +4,14 @@ import { getSelectedContact } from '../../actions/contactActions'
 import styled from 'styled-components'
 import { isEmpty } from 'lodash'
 import ContactListItem from '../common/ContactListItem'
+import Fade from 'react-reveal/Fade'
+
+import posed from 'react-pose'
 
 class Contact extends Component {
+  state = {
+    load: true,
+  }
   componentWillMount() {
     if (!isEmpty(this.props.selectedContact)) {
       localStorage.setItem(
@@ -14,9 +20,12 @@ class Contact extends Component {
       )
     }
   }
+  componentDidMount() {
+    this.setState({ load: false })
+  }
+
   render() {
     const selectedContact = JSON.parse(localStorage.getItem('selectedContact'))
-
     const adress = (
       <div>
         {selectedContact.address.street}
@@ -33,32 +42,49 @@ class Contact extends Component {
 
     return (
       <ContactWrapper>
-        <Image img={selectedContact.largeImageURL} />
+        <Fade>
+          <Image img={selectedContact.largeImageURL} />
+        </Fade>
         <ContactName>{selectedContact.name}</ContactName>
         <CompanyName>{selectedContact.companyName}</CompanyName>
-        <ListWrapper>
-          <ContactListItem
-            title="phone:"
-            data={selectedContact.phone.home}
-            phoneType="Home"
-          />
-          <ContactListItem
-            title="phone:"
-            data={selectedContact.phone.mobile}
-            phoneType="Mobile"
-          />
-          <ContactListItem
-            title="phone:"
-            data={selectedContact.phone.work}
-            phoneType="Work"
-          />
-          <ContactListItem title="adress:" data={adress} />
-          <ContactListItem
-            title="birthdate:"
-            data={selectedContact.birthdate}
-          />
-          <ContactListItem title="email:" data={selectedContact.emailAddress} />
-        </ListWrapper>
+        <ListWrapperStyled pose={this.state.load ? 'closed' : 'open'}>
+          <Item>
+            <ContactListItem
+              title="phone:"
+              data={selectedContact.phone.home}
+              phoneType="Home"
+            />
+          </Item>
+          <Item>
+            <ContactListItem
+              title="phone:"
+              data={selectedContact.phone.mobile}
+              phoneType="Mobile"
+            />
+          </Item>
+          <Item>
+            <ContactListItem
+              title="phone:"
+              data={selectedContact.phone.work}
+              phoneType="Work"
+            />
+          </Item>
+          <Item>
+            <ContactListItem title="adress:" data={adress} />
+          </Item>
+          <Item>
+            <ContactListItem
+              title="birthdate:"
+              data={selectedContact.birthdate}
+            />
+          </Item>
+          <Item>
+            <ContactListItem
+              title="email:"
+              data={selectedContact.emailAddress}
+            />
+          </Item>
+        </ListWrapperStyled>
       </ContactWrapper>
     )
   }
@@ -84,7 +110,18 @@ const CompanyName = styled.h2`
   font-weight: 200;
   font-size: 16px;
 `
-const ListWrapper = styled.ul`
+const ListWrapper = posed.div({
+  open: {
+    delayChildren: 200,
+    staggerChildren: 50,
+    height: '270px',
+  },
+  closed: {
+    height: '0px',
+    delay: 300,
+  },
+})
+const ListWrapperStyled = styled(ListWrapper)`
   width: 100%;
 `
 const ContactWrapper = styled.div`
@@ -100,3 +137,9 @@ const Image = styled.div`
   background-size: cover;
   margin: 20px;
 `
+// POSED animations
+
+const Item = posed.div({
+  open: { y: 0, opacity: 1 },
+  closed: { y: 20, opacity: 0 },
+})
