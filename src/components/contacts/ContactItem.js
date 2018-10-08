@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Line from '../common/Line'
 
 export default ({ contact, i, data, favorite, selectContact }) => {
   return (
@@ -57,12 +58,4 @@ const ContactCompany = styled.span`
   font-size: 14px;
   margin-left: 22px;
   color: rgba(0, 0, 0, 0.3);
-`
-const Line = styled.span`
-  position: absolute;
-  height: 1px;
-  background-color: rgba(0, 0, 0, 0.1);
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 40px);
 `

@@ -37,6 +37,7 @@ export default (state = initialState, action) => {
     case GET_SELECTED_CONTACT:
       return {
         ...state,
+        isLoading: false,
         selectedContact: filter(
           [...state.favoriteContacts, ...state.otherContacts],
           contact => contact.id === action.payload
