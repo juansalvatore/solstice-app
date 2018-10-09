@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
+var ObjectId = require('mongoose').Types.ObjectId
 
 const Contact = require('../../models/Contact')
 
@@ -32,7 +33,7 @@ router.post('/', (req, res) => {
   const contactFields = {
     name: req.body.name,
     companyName: req.body.company,
-    isFavorite: req.body.favorite,
+    isFavorite: req.body.isfavorite,
     smallImageURL: req.body.smallimageurl,
     largeImageURL: req.body.largeimageurl,
     emailAddress: req.body.email,
@@ -54,6 +55,23 @@ router.post('/', (req, res) => {
     .save()
     .then(contact => res.json(contact))
     .catch(err => res.json(err))
+})
+
+// @route   POST api/contacts/favorite/:id
+// @desc    Toggle favorite
+// @access  Private
+router.post('/favorite/:contact_id', (req, res) => {
+  const errors = {}
+  Contact.findOne({ _id: req.params.contact_id })
+    .then(contact => {
+      contact.update({ isFavorite: !contact.isFavorite }, () =>
+        res.json(contact)
+      )
+    })
+    .catch(err => {
+      errors.findcontact = 'Contact not found'
+      res.status(404).json(err)
+    })
 })
 
 module.exports = router

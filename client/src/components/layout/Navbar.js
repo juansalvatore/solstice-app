@@ -10,12 +10,20 @@ class Navbar extends Component {
     const isContact = !isEmpty(this.props.contacts.selectedContact)
 
     const listNav = <Title>Contacts</Title>
+
     const contactNav = (
       <ContactNavWrapper>
         <Link to="/">{'< Contacts'}</Link>
-        <span onClick={() => this.props.toggleFavorite('100')}>star</span>
+        <span
+          onClick={() =>
+            this.props.toggleFavorite(this.props.contacts.selectedContact._id)
+          }
+        >
+          star
+        </span>
       </ContactNavWrapper>
     )
+
     return <NavbarWrapper>{!isContact ? listNav : contactNav}</NavbarWrapper>
   }
 }

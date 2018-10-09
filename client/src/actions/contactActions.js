@@ -10,7 +10,7 @@ import axios from 'axios'
 export const getContacts = () => dispatch => {
   dispatch(setContactsLoading())
   axios
-    .get('/technical-challenge/v3/contacts.json')
+    .get('http://localhost:5000/api/contacts')
     .then(res =>
       dispatch({
         type: GET_CONTACTS,
@@ -29,6 +29,7 @@ export const getSelectedContact = id => dispatch => {
 }
 
 export const toggleFavorite = id => dispatch => {
+  axios.post(`/api/contacts/favorite/${id}`).then(res => {})
   dispatch({
     type: TOGGLE_FAVORITE,
     payload: id,

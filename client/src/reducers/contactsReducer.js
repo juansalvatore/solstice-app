@@ -49,28 +49,7 @@ export default (state = initialState, action) => {
       return { ...state, isLoading: true }
 
     case TOGGLE_FAVORITE:
-      const favorite = state.favoriteContacts.filter(
-        contact => contact.id === action.payload
-      )[0]
-      // Check if it's in favorites
-      if (typeof favorite !== 'undefined') {
-        const newOther = { ...favorite, isFavorite: !favorite.isFavorite }
-        const newState = {
-          ...state,
-          otherContacts: orderBy(
-            [...state.otherContacts, newOther],
-            'id',
-            'dec'
-          ),
-          favoriteContacts: state.favoriteContacts.filter(
-            contact => contact.id !== action.payload
-          ),
-        }
-        console.log(newState)
-      } else {
-      }
-
-    // Check if it's in others
+      return state
 
     default:
       return state
