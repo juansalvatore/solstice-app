@@ -4,7 +4,7 @@ import Line from '../common/Line'
 
 export default ({ contact, i, data, favorite, selectContact }) => {
   return (
-    <div onClick={() => selectContact(contact.id)}>
+    <div onClick={() => selectContact(contact._id)}>
       <ContactItemWrapper>
         <ContactImage img={contact.smallImageURL} />
         <ContactTextContainer>

@@ -22,10 +22,17 @@ export const getContacts = () => dispatch => {
 
 export const getSelectedContact = id => dispatch => {
   dispatch(setContactsLoading())
-  dispatch({
-    type: GET_SELECTED_CONTACT,
-    payload: id,
-  })
+  console.log(id)
+  axios
+    .get(`/api/contacts/${id}`)
+    .then(res => {
+      localStorage.setItem('selectedContact', JSON.stringify(res.data))
+      dispatch({
+        type: GET_SELECTED_CONTACT,
+        payload: res.data,
+      })
+    })
+    .catch()
 }
 
 export const toggleFavorite = id => dispatch => {

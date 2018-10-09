@@ -9,9 +9,18 @@ const validateContactInput = require('../../validation/contact')
 
 router.get('/test', (req, res) => res.json({ test: 'Contacts work' }))
 
-// @route   GET api/contacts
+// @route   GET api/contacts/:id
 // @desc    Get all contacts
-// @access  Private
+// @access  Public
+router.get('/:id', (req, res) => {
+  Contact.findOne({ _id: req.params.id })
+    .then(contact => res.json(contact))
+    .catch(err => res.json(err))
+})
+
+// @route   GET api/contacts
+// @desc    Get specific contact
+// @access  Public
 router.get('/', (req, res) => {
   Contact.find({})
     .then(contacts => res.json(contacts))
@@ -20,7 +29,7 @@ router.get('/', (req, res) => {
 
 // @route   POST api/contacts
 // @desc    Create Post
-// @access  Private
+// @access  Public
 router.post('/', (req, res) => {
   const { errors, isValid } = validateContactInput(req.body)
 
@@ -59,12 +68,12 @@ router.post('/', (req, res) => {
 
 // @route   POST api/contacts/favorite/:id
 // @desc    Toggle favorite
-// @access  Private
+// @access  Public
 router.post('/favorite/:contact_id', (req, res) => {
   const errors = {}
   Contact.findOne({ _id: req.params.contact_id })
     .then(contact => {
-      contact.update({ isFavorite: !contact.isFavorite }, () =>
+      contact.updateOne({ isFavorite: !contact.isFavorite }, () =>
         res.json(contact)
       )
     })

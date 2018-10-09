@@ -12,14 +12,6 @@ class Contact extends Component {
   state = {
     load: true,
   }
-  componentWillMount() {
-    if (!isEmpty(this.props.selectedContact)) {
-      localStorage.setItem(
-        'selectedContact',
-        JSON.stringify(this.props.selectedContact)
-      )
-    }
-  }
   componentDidMount() {
     this.setState({ load: false })
   }

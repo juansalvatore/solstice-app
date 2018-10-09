@@ -24,7 +24,7 @@ class ContactList extends Component {
           contact={contact}
           i={i}
           data={favoriteContacts}
-          selectContact={() => this.props.getSelectedContact(contact.id)}
+          selectContact={() => this.props.getSelectedContact(contact._id)}
         />
       </NavLink>
     ))
@@ -39,7 +39,7 @@ class ContactList extends Component {
           contact={contact}
           i={i}
           data={otherContacts}
-          selectContact={() => this.props.getSelectedContact(contact.id)}
+          selectContact={() => this.props.getSelectedContact(contact._id)}
         />
       </NavLink>
     ))
