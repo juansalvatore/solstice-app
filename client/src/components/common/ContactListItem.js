@@ -21,7 +21,7 @@ const ListItemWrapper = styled.li`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 20px 20px;
+  padding: 19px 20px;
   width: 100%;
 `
 const ItemTitle = styled.span`
