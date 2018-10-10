@@ -9,8 +9,6 @@ import ContentLoader from 'react-content-loader'
 import { isEmpty } from 'lodash'
 import { ReactComponent as Add } from '../../img/icons/add.svg'
 
-import Fade from 'react-reveal/Fade'
-
 class ContactList extends Component {
   componentDidMount() {
     this.props.getContacts()
@@ -76,9 +74,7 @@ class ContactList extends Component {
                 {loader}
               </div>
             ) : (
-              <Fade>
-                <div>{this.displayFavoriteContacts()}</div>
-              </Fade>
+              <div>{this.displayFavoriteContacts()}</div>
             )}
           </div>
         ) : null}
@@ -93,9 +89,7 @@ class ContactList extends Component {
             {loader}
           </div>
         ) : (
-          <Fade>
-            <div>{this.displayOtherContacts()}</div>
-          </Fade>
+          <div>{this.displayOtherContacts()}</div>
         )}
         <Link to="/contact/add">
           <AddStyled />

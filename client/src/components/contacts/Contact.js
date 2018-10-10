@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getSelectedContact } from '../../actions/contactActions'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import ContactListItem from '../common/ContactListItem'
-import Fade from 'react-reveal/Fade'
 
 import posed from 'react-pose'
 
@@ -21,6 +20,7 @@ class Contact extends Component {
     const adressString = `${selectedContact.address.city}, ${
       selectedContact.address.state
     }, ${selectedContact.address.zipCode}, ${selectedContact.address.country}`
+
     const adress = (
       <div>
         {selectedContact.address.street}
@@ -31,9 +31,15 @@ class Contact extends Component {
 
     return (
       <ContactWrapper>
-        <Fade>
-          <Image img={selectedContact.largeImageURL} />
-        </Fade>
+        <Image
+          src={selectedContact.largeImageURL}
+          onError={e => {
+            e.target.onerror = null
+            e.target.src =
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS66z4PSz1ji0ZFAC5nheeYNnTPielTFlpmiWqwSAmCoUT3GJPc'
+          }}
+        />
+
         <ContactName>{selectedContact.name}</ContactName>
         <CompanyName>{selectedContact.companyName}</CompanyName>
         <ListWrapperStyled pose={this.state.load ? 'closed' : 'open'}>
@@ -88,17 +94,6 @@ export default connect(
   { getSelectedContact }
 )(Contact)
 
-const ContactName = styled.h1`
-  font-weight: 400;
-  font-size: 28px;
-  margin-bottom: 5px;
-`
-const CompanyName = styled.h2`
-  margin-bottom: 25px;
-  color: rgba(0, 0, 0, 0.3);
-  font-weight: 200;
-  font-size: 16px;
-`
 const ListWrapper = posed.div({
   open: {
     delayChildren: 200,
@@ -119,13 +114,48 @@ const ContactWrapper = styled.div`
   flex-direction: column;
   align-items: center;
 `
-const Image = styled.div`
-  background: url(${props => props.img});
+
+const appear = keyframes`
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+`
+const ContactName = styled.h1`
+  font-weight: 400;
+  font-size: 28px;
+  margin-bottom: 5px;
+  animation: ${appear} 0.5s linear;
+  animation-fill-mode: forwards;
+  animation-delay: 0.7s;
+  opacity: 0;
+`
+const CompanyName = styled.h2`
+  margin-bottom: 25px;
+  color: rgba(0, 0, 0, 0.3);
+  font-weight: 200;
+  font-size: 16px;
+  opacity: 0;
+  animation: ${appear} 0.5s linear;
+  animation-fill-mode: forwards;
+  animation-delay: 1s;
+`
+
+const Image = styled.img`
+  /* background: url(${props => props.img}); */
   width: 150px;
   height: 150px;
-  background-position: center;
-  background-size: cover;
+  /* background-position: center;
+  background-size: cover; */
   margin: 20px;
+  animation: ${appear} 0.7s linear;
+  animation-fill-mode: forwards;
+  animation-delay: 0.5s;
+  opacity: 0;
 `
 // POSED animations
 

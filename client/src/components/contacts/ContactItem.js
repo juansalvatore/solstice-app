@@ -6,7 +6,14 @@ export default ({ contact, i, data, favorite, selectContact }) => {
   return (
     <div onClick={() => selectContact(contact._id)}>
       <ContactItemWrapper>
-        <ContactImage img={contact.smallImageURL} />
+        <ContactImage
+          src={contact.smallImageURL}
+          onError={e => {
+            e.target.onerror = null
+            e.target.src =
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS66z4PSz1ji0ZFAC5nheeYNnTPielTFlpmiWqwSAmCoUT3GJPc'
+          }}
+        />
         <ContactTextContainer>
           <div style={!favorite ? { marginLeft: 22 } : null}>
             <span
@@ -14,7 +21,7 @@ export default ({ contact, i, data, favorite, selectContact }) => {
               aria-label="star"
               style={!favorite ? { display: 'none' } : null}
             >
-              ⭐{' '}
+              ⭐
             </span>
             {contact.name}
           </div>
@@ -38,10 +45,7 @@ const ContactItemWrapper = styled.div`
   }
 `
 
-const ContactImage = styled.span`
-  background: url(${props => props.img});
-  background-position: center;
-  background-size: cover;
+const ContactImage = styled.img`
   width: 60px;
   height: 60px;
 `

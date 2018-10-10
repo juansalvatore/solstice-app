@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
-var ObjectId = require('mongoose').Types.ObjectId
 
 const Contact = require('../../models/Contact')
 
@@ -81,6 +80,40 @@ router.post('/favorite/:contact_id', (req, res) => {
       errors.findcontact = 'Contact not found'
       res.status(404).json(err)
     })
+})
+
+// @route   POST api/contacts/populate
+// @desc    Seed database
+// @access  Public
+router.get('/api/contacts/populate', (req, res) => {
+  Contact.find({})
+    .removeAsync()
+    .then(() =>
+      Contact.create({
+        name: 'Winnie-the-Pooh',
+        companyName: 'Honey Bear, Inc',
+        isFavorite: false,
+        smallImageURL:
+          'https://s3.amazonaws.com/technical-challenge/v3/images/winnie-the-pooh-small.jpg',
+        largeImageURL:
+          'https://s3.amazonaws.com/technical-challenge/v3/images/winnie-the-pooh-large.jpg',
+        emailAddress: 'Winnie.the.Pooh@honeybearinc.com',
+        birthdate: '1988-07-24',
+        phone: {
+          home: '808-949-8253',
+        },
+        address: {
+          street: '933 Wiliwili St',
+          city: 'Honolulu',
+          state: 'HI',
+          country: 'US',
+          zipCode: '96826',
+        },
+      })
+        .save()
+        .then(contact => res.json(contact))
+        .catch(err => res.json(err))
+    )
 })
 
 module.exports = router
