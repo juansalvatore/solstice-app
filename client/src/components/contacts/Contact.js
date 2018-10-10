@@ -18,6 +18,7 @@ class Contact extends Component {
 
   render() {
     const selectedContact = JSON.parse(localStorage.getItem('selectedContact'))
+
     const adressString = `${selectedContact.address.city}, ${
       selectedContact.address.state
     }, ${selectedContact.address.zipCode}, ${selectedContact.address.country}`

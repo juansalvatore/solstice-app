@@ -16,7 +16,6 @@ class ContactList extends Component {
 
   displayFavoriteContacts = () => {
     const favoriteContacts = this.props.contacts.favoriteContacts
-
     return favoriteContacts.map((contact, i) => (
       <NavLink to="/contact" key={i}>
         <ContactItem

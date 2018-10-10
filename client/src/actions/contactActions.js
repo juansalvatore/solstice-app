@@ -3,6 +3,7 @@ import {
   CONTACTS_LOADING,
   GET_SELECTED_CONTACT,
   TOGGLE_FAVORITE,
+  SET_CONTACTS,
 } from './types'
 import axios from 'axios'
 
@@ -42,6 +43,13 @@ export const toggleFavorite = id => dispatch => {
       type: TOGGLE_FAVORITE,
       payload: id,
     })
+  })
+}
+
+export const setSelectedContact = contact => dispatch => {
+  dispatch({
+    type: SET_CONTACTS,
+    payload: contact,
   })
 }
 

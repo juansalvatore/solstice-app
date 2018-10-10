@@ -3,6 +3,7 @@ import {
   CONTACTS_LOADING,
   GET_SELECTED_CONTACT,
   TOGGLE_FAVORITE,
+  SET_CONTACTS,
 } from '../actions/types'
 import { filter, orderBy, isEmpty, find } from 'lodash'
 
@@ -53,6 +54,9 @@ export default (state = initialState, action) => {
           isFavorite: !state.selectedContact.isFavorite,
         },
       }
+
+    case SET_CONTACTS:
+      return { ...state, selectedContact: { ...action.payload } }
 
     default:
       return state

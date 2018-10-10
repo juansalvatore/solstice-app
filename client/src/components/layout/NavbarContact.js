@@ -2,19 +2,27 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { toggleFavorite } from '../../actions/contactActions'
+import {
+  toggleFavorite,
+  setSelectedContact,
+} from '../../actions/contactActions'
 import { ReactComponent as Star } from '../../img/icons/star.svg'
 
 class Navbar extends Component {
   handleClick = () => {
-    const selectedContact = JSON.parse(localStorage.getItem('selectedContact'))
+    const selectedContact = JSON.parse(localStorage.getItem('contacts'))
+      .selectedContact
 
     this.props.toggleFavorite(this.props.contacts.selectedContact._id)
+  }
+  componentDidMount() {
+    const contacts = JSON.parse(localStorage.getItem('selectedContact'))
+
+    this.props.setSelectedContact(contacts)
   }
 
   render() {
     const selectedContact = JSON.parse(localStorage.getItem('selectedContact'))
-
     return (
       <NavbarWrapper>
         <ContactNavWrapper>
@@ -38,7 +46,7 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { toggleFavorite }
+  { toggleFavorite, setSelectedContact }
 )(Navbar)
 
 const NavbarWrapper = styled.div`
