@@ -66,13 +66,26 @@ const ContactNavWrapper = styled.div`
   padding-left: 20px;
   padding-right: 20px;
   justify-content: space-between;
+  align-items: flex-end;
 `
 
-const ToggleFavorite = styled.span``
+const ToggleFavorite = styled.span`
+  margin-bottom: -10px;
+`
 const StarStyled = styled(Star)`
   cursor: pointer;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   stroke: #ccc;
-  fill: ${props => (props.style.isFavorite === true ? 'red' : '#ccc')};
+  padding: 5px;
+  border-radius: 50px;
+  fill: ${props =>
+    props.style.isFavorite === true ? 'rgb(244,	178, 22)' : '#ccc'};
+  transition: all ease-in-out 200ms;
+  :hover {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+  :active {
+    transform: scale(0.8);
+  }
 `

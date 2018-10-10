@@ -14,7 +14,7 @@ export default ({ contact, i, data, favorite, selectContact }) => {
               aria-label="star"
               style={!favorite ? { display: 'none' } : null}
             >
-              ⭐
+              ⭐{' '}
             </span>
             {contact.name}
           </div>

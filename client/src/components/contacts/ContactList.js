@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import ContactItem from './ContactItem'
 import ContentLoader from 'react-content-loader'
+import { isEmpty } from 'lodash'
 
 import Fade from 'react-reveal/Fade'
 
@@ -62,20 +63,24 @@ class ContactList extends Component {
 
     return (
       <ContactListWrapper>
-        <ContactsDivisor>Favorite contacts</ContactsDivisor>
-        {this.props.contacts.isLoading ? (
+        {!isEmpty(this.props.contacts.favoriteContacts) ? (
           <div>
-            {loader}
-            <br />
-            {loader}
-            <br />
-            {loader}
+            <ContactsDivisor>Favorite contacts</ContactsDivisor>
+            {this.props.contacts.isLoading ? (
+              <div>
+                {loader}
+                <br />
+                {loader}
+                <br />
+                {loader}
+              </div>
+            ) : (
+              <Fade>
+                <div>{this.displayFavoriteContacts()}</div>
+              </Fade>
+            )}
           </div>
-        ) : (
-          <Fade>
-            <div>{this.displayFavoriteContacts()}</div>
-          </Fade>
-        )}
+        ) : null}
 
         <ContactsDivisor>Other contacts</ContactsDivisor>
         {this.props.contacts.isLoading ? (
