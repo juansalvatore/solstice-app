@@ -5,7 +5,7 @@ import {
   TOGGLE_FAVORITE,
   SET_CONTACTS,
 } from '../actions/types'
-import { filter, orderBy, isEmpty, find } from 'lodash'
+import { filter, orderBy, isEmpty } from 'lodash'
 
 const initialState = {
   favoriteContacts: [],
@@ -56,7 +56,13 @@ export default (state = initialState, action) => {
       }
 
     case SET_CONTACTS:
-      return { ...state, selectedContact: { ...action.payload } }
+      return {
+        ...state,
+        selectedContact: {
+          ...action.payload,
+          isFavorite: !action.payload.isFavorite,
+        },
+      }
 
     default:
       return state

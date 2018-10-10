@@ -23,7 +23,7 @@ export const getContacts = () => dispatch => {
 
 export const getSelectedContact = id => dispatch => {
   dispatch(setContactsLoading())
-  console.log(id)
+
   axios
     .get(`/api/contacts/${id}`)
     .then(res => {
@@ -38,7 +38,10 @@ export const getSelectedContact = id => dispatch => {
 
 export const toggleFavorite = id => dispatch => {
   axios.post(`/api/contacts/favorite/${id}`).then(res => {
-    localStorage.setItem('selectedContact', JSON.stringify(res.data))
+    localStorage.setItem(
+      'selectedContact',
+      JSON.stringify({ ...res.data, isFavorite: !res.data.isFavorite })
+    )
     dispatch({
       type: TOGGLE_FAVORITE,
       payload: id,

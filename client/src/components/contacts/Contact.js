@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getSelectedContact } from '../../actions/contactActions'
 import styled from 'styled-components'
-import { isEmpty } from 'lodash'
 import ContactListItem from '../common/ContactListItem'
 import Fade from 'react-reveal/Fade'
 

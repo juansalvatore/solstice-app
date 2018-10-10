@@ -10,19 +10,18 @@ import { ReactComponent as Star } from '../../img/icons/star.svg'
 
 class Navbar extends Component {
   handleClick = () => {
-    const selectedContact = JSON.parse(localStorage.getItem('contacts'))
-      .selectedContact
-
     this.props.toggleFavorite(this.props.contacts.selectedContact._id)
   }
-  componentDidMount() {
-    const contacts = JSON.parse(localStorage.getItem('selectedContact'))
 
-    this.props.setSelectedContact(contacts)
+  componentDidMount() {
+    const selectedContact = JSON.parse(localStorage.getItem('selectedContact'))
+    this.props.setSelectedContact({
+      ...selectedContact,
+      isFavorite: !selectedContact.isFavorite,
+    })
   }
 
   render() {
-    const selectedContact = JSON.parse(localStorage.getItem('selectedContact'))
     return (
       <NavbarWrapper>
         <ContactNavWrapper>
@@ -30,7 +29,9 @@ class Navbar extends Component {
           <ToggleFavorite onClick={() => this.handleClick()}>
             {this.props.contacts.selectedContact ? (
               <StarStyled
-                favorite={this.props.contacts.selectedContact.isFavorite}
+                style={{
+                  isFavorite: this.props.contacts.selectedContact.isFavorite,
+                }}
               />
             ) : null}
           </ToggleFavorite>
@@ -73,5 +74,5 @@ const StarStyled = styled(Star)`
   width: 20px;
   height: 20px;
   stroke: #ccc;
-  fill: ${props => (props.favorite === true ? 'red' : '#ccc')};
+  fill: ${props => (props.style.isFavorite === true ? 'red' : '#ccc')};
 `
