@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://localhost:5000",
   "dependencies": {
+    "@material-ui/core": "^3.2.0",
     "axios": "^0.18.0",
     "enzyme": "^3.7.0",
     "lodash": "^4.17.11",

@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { getContacts, getSelectedContact } from '../../actions/contactActions'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import ContactItem from './ContactItem'
 import ContentLoader from 'react-content-loader'
 import { isEmpty } from 'lodash'
+import { ReactComponent as Add } from '../../img/icons/add.svg'
 
 import Fade from 'react-reveal/Fade'
 
@@ -18,7 +19,7 @@ class ContactList extends Component {
   displayFavoriteContacts = () => {
     const favoriteContacts = this.props.contacts.favoriteContacts
     return favoriteContacts.map((contact, i) => (
-      <NavLink to="/contact" key={i}>
+      <Link to="/contact" key={i}>
         <ContactItem
           favorite={true}
           contact={contact}
@@ -26,7 +27,7 @@ class ContactList extends Component {
           data={favoriteContacts}
           selectContact={() => this.props.getSelectedContact(contact._id)}
         />
-      </NavLink>
+      </Link>
     ))
   }
 
@@ -34,14 +35,14 @@ class ContactList extends Component {
     const otherContacts = this.props.contacts.otherContacts
 
     return otherContacts.map((contact, i) => (
-      <NavLink to="/contact" key={i}>
+      <Link to="/contact" key={i}>
         <ContactItem
           contact={contact}
           i={i}
           data={otherContacts}
           selectContact={() => this.props.getSelectedContact(contact._id)}
         />
-      </NavLink>
+      </Link>
     ))
   }
 
@@ -96,6 +97,9 @@ class ContactList extends Component {
             <div>{this.displayOtherContacts()}</div>
           </Fade>
         )}
+        <Link to="/contact/add">
+          <AddStyled />
+        </Link>
       </ContactListWrapper>
     )
   }
@@ -117,7 +121,7 @@ export default connect(
 )(ContactList)
 
 const ContactListWrapper = styled.div`
-  max-width: 1000px;
+  max-width: 900px;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
@@ -131,4 +135,21 @@ const ContactsDivisor = styled.div`
   font-size: 13px;
   font-weight: 500;
   color: rgb(111, 113, 116);
+`
+
+const AddStyled = styled(Add)`
+  width: 30px;
+  fill: rgba(0, 0, 0, 0.2);
+  transition: all ease-in-out 200ms;
+  cursor: pointer;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%) scale(1);
+  margin-top: 10px;
+  :hover {
+    fill: rgba(0, 0, 0, 0.6);
+  }
+  :active {
+    transform: translateX(-50%) scale(0.8);
+  }
 `

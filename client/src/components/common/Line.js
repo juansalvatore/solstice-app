@@ -12,4 +12,5 @@ const StyledLine = styled.span`
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - 40px);
+  max-width: 800px;
 `

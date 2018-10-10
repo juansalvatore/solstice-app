@@ -8,6 +8,7 @@ import NavbarContact from './components/layout/NavbarContact'
 import NavbarHome from './components/layout/NavbarHome'
 import ContactList from './components/contacts/ContactList'
 import Contact from './components/contacts/Contact'
+import CreateContact from './components/create-contact/CreateContact'
 
 class App extends Component {
   render() {
@@ -19,6 +20,8 @@ class App extends Component {
             <Route exact path="/" component={ContactList} />
             <Route exact path="/contact" component={NavbarContact} />
             <Route exact path="/contact" component={Contact} />
+            <Route exact path="/contact/:add" component={NavbarContact} />
+            <Route exact path="/contact/:add" component={CreateContact} />
           </div>
         </Router>
       </Provider>

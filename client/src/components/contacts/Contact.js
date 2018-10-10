@@ -112,6 +112,7 @@ const ListWrapper = posed.div({
 })
 const ListWrapperStyled = styled(ListWrapper)`
   width: 100%;
+  max-width: 800px;
 `
 const ContactWrapper = styled.div`
   display: flex;

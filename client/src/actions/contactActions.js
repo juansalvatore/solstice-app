@@ -4,6 +4,7 @@ import {
   GET_SELECTED_CONTACT,
   TOGGLE_FAVORITE,
   SET_CONTACTS,
+  GET_ERRORS,
 } from './types'
 import axios from 'axios'
 
@@ -54,6 +55,18 @@ export const setSelectedContact = contact => dispatch => {
     type: SET_CONTACTS,
     payload: contact,
   })
+}
+
+export const createContact = (contactData, history) => dispatch => {
+  axios
+    .post('/api/contacts', contactData)
+    .then(res => history.push('/'))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    )
 }
 
 // Set isLoading to true
