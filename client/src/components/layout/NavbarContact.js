@@ -7,6 +7,7 @@ import {
   setSelectedContact,
 } from '../../actions/contactActions'
 import { ReactComponent as Star } from '../../img/icons/star.svg'
+import { ReactComponent as LeftArrow } from '../../img/icons/left-arrow.svg'
 
 class Navbar extends Component {
   handleClick = () => {
@@ -25,7 +26,10 @@ class Navbar extends Component {
     return (
       <NavbarWrapper>
         <ContactNavWrapper>
-          <Link to="/">{'< Contacts'}</Link>
+          <LinkStyled to="/">
+            <LeftArrowStyled />
+            Contacts
+          </LinkStyled>
           <ToggleFavorite onClick={() => this.handleClick()}>
             {this.props.contacts.selectedContact ? (
               <StarStyled
@@ -59,16 +63,26 @@ const NavbarWrapper = styled.div`
   font-weight: 500;
   border-bottom: 1px solid rgb(241, 241, 241);
 `
-
 const ContactNavWrapper = styled.div`
   display: flex;
   width: 100%;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
   justify-content: space-between;
   align-items: flex-end;
 `
-
+const LeftArrowStyled = styled(LeftArrow)`
+  width: 20px;
+  height: 20px;
+  margin: 0 5px -4px 0;
+`
+const LinkStyled = styled(Link)`
+  color: rgba(52, 130, 199, 1);
+  transition: all ease-in-out 200ms;
+  :hover {
+    opacity: 0.8;
+  }
+`
 const ToggleFavorite = styled.span`
   margin-bottom: -10px;
 `
