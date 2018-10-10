@@ -46,7 +46,13 @@ export default (state = initialState, action) => {
       return { ...state, isLoading: true }
 
     case TOGGLE_FAVORITE:
-      return state
+      return {
+        ...state,
+        selectedContact: {
+          ...state.selectedContact,
+          isFavorite: !state.selectedContact.isFavorite,
+        },
+      }
 
     default:
       return state

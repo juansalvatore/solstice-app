@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavbarHome component matches the snapshot 1`] = `
+<div
+  className="sc-bdVaJa keXJQU"
+>
+  <h1
+    className="sc-bwzfXH dPXpuN"
+  >
+    Contacts
+  </h1>
+</div>
+`;
