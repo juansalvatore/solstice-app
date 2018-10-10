@@ -12,7 +12,7 @@ import axios from 'axios'
 export const getContacts = () => dispatch => {
   dispatch(setContactsLoading())
   axios
-    .get('http://localhost:5000/api/contacts')
+    .get('/api/contacts')
     .then(res =>
       dispatch({
         type: GET_CONTACTS,

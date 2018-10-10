@@ -158,7 +158,7 @@ class AddContact extends Component {
             onChange={this.onChange}
             error={errors.mobile}
           />
-          <SubmitButton variant="raised" type="submit">
+          <SubmitButton variant="contained" type="submit">
             Submit
           </SubmitButton>
         </FormWrapper>
