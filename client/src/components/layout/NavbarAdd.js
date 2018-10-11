@@ -9,11 +9,7 @@ import {
 import { ReactComponent as Star } from '../../img/icons/star.svg'
 import { ReactComponent as LeftArrow } from '../../img/icons/left-arrow.svg'
 
-class Navbar extends Component {
-  handleClick = () => {
-    this.props.toggleFavorite(this.props.contacts.selectedContact._id)
-  }
-
+class NavbarAdd extends Component {
   componentDidMount() {
     const selectedContact = JSON.parse(localStorage.getItem('selectedContact'))
     this.props.setSelectedContact({
@@ -30,15 +26,7 @@ class Navbar extends Component {
             <LeftArrowStyled />
             Contacts
           </LinkStyled>
-          <ToggleFavorite onClick={() => this.handleClick()}>
-            {this.props.contacts.selectedContact ? (
-              <StarStyled
-                style={{
-                  isFavorite: this.props.contacts.selectedContact.isFavorite,
-                }}
-              />
-            ) : null}
-          </ToggleFavorite>
+          <Title>Add user</Title>
         </ContactNavWrapper>
       </NavbarWrapper>
     )
@@ -51,8 +39,8 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { toggleFavorite, setSelectedContact }
-)(Navbar)
+  { setSelectedContact }
+)(NavbarAdd)
 
 const NavbarWrapper = styled.div`
   display: flex;
