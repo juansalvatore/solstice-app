@@ -8,7 +8,7 @@ import {
 } from './types'
 import axios from 'axios'
 
-// Get contacts list
+// Retrieves contact list
 export const getContacts = () => dispatch => {
   dispatch(setContactsLoading())
   axios
@@ -22,9 +22,9 @@ export const getContacts = () => dispatch => {
     .catch(err => console.log(err))
 }
 
+// Retrieves selected contact
 export const getSelectedContact = id => dispatch => {
   dispatch(setContactsLoading())
-
   axios
     .get(`/api/contacts/${id}`)
     .then(res => {
@@ -37,12 +37,10 @@ export const getSelectedContact = id => dispatch => {
     .catch()
 }
 
+// Toggles isFavorite value in contact document
 export const toggleFavorite = id => dispatch => {
   axios.post(`/api/contacts/favorite/${id}`).then(res => {
-    localStorage.setItem(
-      'selectedContact',
-      JSON.stringify({ ...res.data, isFavorite: !res.data.isFavorite })
-    )
+    localStorage.setItem('selectedContact', JSON.stringify({ ...res.data, isFavorite: !res.data.isFavorite }))
     dispatch({
       type: TOGGLE_FAVORITE,
       payload: id,
@@ -50,6 +48,7 @@ export const toggleFavorite = id => dispatch => {
   })
 }
 
+// Stores selected contact in redux store
 export const setSelectedContact = contact => dispatch => {
   dispatch({
     type: SET_CONTACTS,
@@ -57,6 +56,8 @@ export const setSelectedContact = contact => dispatch => {
   })
 }
 
+// Creates a new contact and redirects to /
+// If errors it stores them in errors object in redux store
 export const createContact = (contactData, history) => dispatch => {
   axios
     .post('/api/contacts', contactData)
@@ -69,7 +70,7 @@ export const createContact = (contactData, history) => dispatch => {
     )
 }
 
-// Set isLoading to true
+// Sets isLoading to true
 const setContactsLoading = () => dispatch => {
   dispatch({
     type: CONTACTS_LOADING,

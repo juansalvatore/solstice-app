@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { getSelectedContact } from '../../actions/contactActions'
 import styled, { keyframes } from 'styled-components'
 import ContactListItem from '../common/ContactListItem'
+import PropTypes from 'prop-types'
 import { isEmpty } from 'lodash'
 import posed from 'react-pose'
 
@@ -15,16 +16,15 @@ class Contact extends Component {
   }
 
   render() {
-    // const selectedContact = JSON.parse(localStorage.getItem('selectedContact'))
     const { selectedContact } = this.props.contacts
-    console.log(isEmpty(selectedContact))
+
     let contactContent
     if (isEmpty(selectedContact)) {
       contactContent = <div />
     } else {
-      const adressString = `${selectedContact.address.city}, ${
-        selectedContact.address.state
-      }, ${selectedContact.address.zipCode}, ${selectedContact.address.country}`
+      const adressString = `${selectedContact.address.city}, ${selectedContact.address.state}, ${
+        selectedContact.address.zipCode
+      }, ${selectedContact.address.country}`
 
       const adress = (
         <div>
@@ -46,44 +46,24 @@ class Contact extends Component {
 
           <ContactName>{selectedContact.name}</ContactName>
           <CompanyName>{selectedContact.companyName}</CompanyName>
-          <ListWrapperStyled
-            pose={this.props.contacts.isLoading ? 'closed' : 'open'}
-          >
+          <ListWrapperStyled pose={this.props.contacts.isLoading ? 'closed' : 'open'}>
             <Item>
-              <ContactListItem
-                title="phone:"
-                data={selectedContact.phone.home}
-                phoneType="Home"
-              />
+              <ContactListItem title="phone:" data={selectedContact.phone.home} phoneType="Home" />
             </Item>
             <Item>
-              <ContactListItem
-                title="phone:"
-                data={selectedContact.phone.mobile}
-                phoneType="Mobile"
-              />
+              <ContactListItem title="phone:" data={selectedContact.phone.mobile} phoneType="Mobile" />
             </Item>
             <Item>
-              <ContactListItem
-                title="phone:"
-                data={selectedContact.phone.work}
-                phoneType="Work"
-              />
+              <ContactListItem title="phone:" data={selectedContact.phone.work} phoneType="Work" />
             </Item>
             <Item>
               <ContactListItem title="adress:" data={adress} />
             </Item>
             <Item>
-              <ContactListItem
-                title="birthdate:"
-                data={selectedContact.birthdate}
-              />
+              <ContactListItem title="birthdate:" data={selectedContact.birthdate} />
             </Item>
             <Item>
-              <ContactListItem
-                title="email:"
-                data={selectedContact.emailAddress}
-              />
+              <ContactListItem title="email:" data={selectedContact.emailAddress} />
             </Item>
           </ListWrapperStyled>
         </ContactWrapper>
@@ -91,6 +71,11 @@ class Contact extends Component {
     }
     return <div>{contactContent}</div>
   }
+}
+
+Contact.propTypes = {
+  contacts: PropTypes.object.isRequired,
+  getSelectedContact: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -122,7 +107,6 @@ const ContactWrapper = styled.div`
   flex-direction: column;
   align-items: center;
 `
-
 const appear = keyframes`
   from {
     opacity: 0;
@@ -152,21 +136,16 @@ const CompanyName = styled.h2`
   animation-fill-mode: forwards;
   animation-delay: 1s;
 `
-
 const Image = styled.img`
-  /* background: url(${props => props.img}); */
   width: 150px;
   height: 150px;
-  /* background-position: center;
-  background-size: cover; */
   margin: 20px;
   animation: ${appear} 0.7s linear;
   animation-fill-mode: forwards;
   animation-delay: 0.5s;
   opacity: 0;
 `
-// POSED animations
-
+// POSED animation
 const Item = posed.div({
   open: { y: 0, opacity: 1 },
   closed: { y: 20, opacity: 0 },

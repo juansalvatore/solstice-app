@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store'
 
-import NavbarContact from './components/layout/NavbarContact'
+import NavbarContact from './containers/layout/NavbarContact'
 import NavbarHome from './components/layout/NavbarHome'
 import NavbarAdd from './components/layout/NavbarAdd'
 import ContactList from './components/contacts/ContactList'
@@ -21,11 +21,7 @@ class App extends Component {
             <Route exact path="/" component={ContactList} />
             <Route exact path="/contact/add" component={NavbarAdd} />
             <Route exact path="/contact/add" component={CreateContact} />
-            <Route
-              exact
-              path="/contact/profile/:id"
-              component={NavbarContact}
-            />
+            <Route exact path="/contact/profile/:id" component={NavbarContact} />
             <Route exact path="/contact/profile/:id" component={Contact} />
           </div>
         </Router>

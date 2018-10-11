@@ -24,6 +24,7 @@ class AddContact extends Component {
     mobile: '',
     errors: {},
   }
+
   componentWillMount() {
     window.scrollTo(0, 0)
   }
@@ -33,9 +34,11 @@ class AddContact extends Component {
       this.setState({ errors: nextProps.errors })
     }
   }
+
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value })
   }
+
   onSubmit = e => {
     e.preventDefault()
     const contactData = {
@@ -170,6 +173,20 @@ class AddContact extends Component {
   }
 }
 
+AddContact.propTypes = {
+  createContact: PropTypes.func.isRequired,
+  errores: PropTypes.object,
+}
+
+const mapStateToProps = state => ({
+  errors: state.errors,
+})
+
+export default connect(
+  mapStateToProps,
+  { createContact }
+)(AddContact)
+
 const CreateContactWrapper = styled.div`
   display: flex;
   width: 100%;
@@ -185,12 +202,3 @@ const FormWrapper = styled.form`
 const SubmitButton = styled(Button)`
   width: 100%;
 `
-
-const mapStateToProps = state => ({
-  errors: state.errors,
-})
-
-export default connect(
-  mapStateToProps,
-  { createContact }
-)(AddContact)

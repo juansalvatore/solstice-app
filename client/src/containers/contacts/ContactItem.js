@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import Line from '../common/Line'
+import PropTypes from 'prop-types'
 
-export default ({ contact, i, data, favorite, selectContact }) => {
+const ContactItem = ({ contact, i, data, favorite, selectContact }) => {
   return (
     <div onClick={() => selectContact(contact._id)}>
       <ContactItemWrapper>
@@ -16,11 +17,7 @@ export default ({ contact, i, data, favorite, selectContact }) => {
         />
         <ContactTextContainer>
           <div style={!favorite ? { marginLeft: 22 } : null}>
-            <span
-              role="img"
-              aria-label="star"
-              style={!favorite ? { display: 'none' } : null}
-            >
+            <span role="img" aria-label="star" style={!favorite ? { display: 'none' } : null}>
               ⭐
             </span>
             {contact.name}
@@ -33,7 +30,16 @@ export default ({ contact, i, data, favorite, selectContact }) => {
   )
 }
 
-// ContactItem style
+ContactItem.propTypes = {
+  selectContact: PropTypes.func.isRequired,
+  contact: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
+  favorite: PropTypes.bool.isRequired,
+  i: PropTypes.number.isRequired,
+}
+
+export default ContactItem
+
 const ContactItemWrapper = styled.div`
   display: flex;
   padding: 20px;
@@ -44,19 +50,16 @@ const ContactItemWrapper = styled.div`
     background-color: rgba(0, 0, 0, 0.05);
   }
 `
-
 const ContactImage = styled.img`
   width: 60px;
   height: 60px;
 `
-
 const ContactTextContainer = styled.div`
   margin-left: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 `
-
 const ContactCompany = styled.span`
   height: 17px;
   font-size: 14px;

@@ -100,9 +100,9 @@ class ContactList extends Component {
 }
 
 ContactList.propTypes = {
+  contacts: PropTypes.object.isRequired,
   getContacts: PropTypes.func.isRequired,
   getSelectedContact: PropTypes.func.isRequired,
-  contacts: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({

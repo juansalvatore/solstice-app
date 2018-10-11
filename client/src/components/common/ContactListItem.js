@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Line from './Line'
+import PropTypes from 'prop-types'
 
 const ContactListItem = ({ title, data, phoneType }) => (
   <div style={!data ? { display: 'none' } : null}>
@@ -14,6 +15,12 @@ const ContactListItem = ({ title, data, phoneType }) => (
     </ListItemWrapper>
   </div>
 )
+
+ContactListItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  data: PropTypes.string.isRequired,
+  phoneType: PropTypes.string,
+}
 
 export default ContactListItem
 

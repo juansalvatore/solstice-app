@@ -2,10 +2,8 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import {
-  toggleFavorite,
-  setSelectedContact,
-} from '../../actions/contactActions'
+import { toggleFavorite, setSelectedContact } from '../../actions/contactActions'
+import PropTypes from 'prop-types'
 import { ReactComponent as Star } from '../../img/icons/star.svg'
 import { ReactComponent as LeftArrow } from '../../img/icons/left-arrow.svg'
 import { isEmpty } from 'lodash'
@@ -44,6 +42,12 @@ class Navbar extends Component {
       </NavbarWrapper>
     )
   }
+}
+
+Navbar.propTypes = {
+  contacts: PropTypes.object.isRequired,
+  toggleFavorite: PropTypes.func.isRequired,
+  setSelectedContact: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -97,8 +101,7 @@ const StarStyled = styled(Star)`
   stroke: #ccc;
   padding: 5px;
   border-radius: 50px;
-  fill: ${props =>
-    props.style.isFavorite === true ? 'rgb(244,	178, 22)' : '#ccc'};
+  fill: ${props => (props.style.isFavorite === true ? 'rgb(244,	178, 22)' : '#ccc')};
   transition: all ease-in-out 200ms;
   :hover {
     background-color: rgba(0, 0, 0, 0.03);

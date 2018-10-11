@@ -1,10 +1,4 @@
-import {
-  GET_CONTACTS,
-  CONTACTS_LOADING,
-  GET_SELECTED_CONTACT,
-  TOGGLE_FAVORITE,
-  SET_CONTACTS,
-} from '../actions/types'
+import { GET_CONTACTS, CONTACTS_LOADING, GET_SELECTED_CONTACT, TOGGLE_FAVORITE, SET_CONTACTS } from '../actions/types'
 import { filter, orderBy, isEmpty } from 'lodash'
 
 const initialState = {
@@ -17,16 +11,8 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_CONTACTS:
-      const favoriteContacts = orderBy(
-        filter(action.payload, contact => contact.isFavorite),
-        'name',
-        'dec'
-      )
-      const otherContacts = orderBy(
-        filter(action.payload, contact => !contact.isFavorite),
-        'name',
-        'dec'
-      )
+      const favoriteContacts = orderBy(filter(action.payload, contact => contact.isFavorite), 'name', 'dec')
+      const otherContacts = orderBy(filter(action.payload, contact => !contact.isFavorite), 'name', 'dec')
 
       return {
         favoriteContacts: [...favoriteContacts],

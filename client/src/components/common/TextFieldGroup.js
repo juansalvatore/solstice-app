@@ -4,16 +4,7 @@ import styled from 'styled-components'
 
 import PropTypes from 'prop-types'
 
-const TextFieldGroup = ({
-  name,
-  label,
-  value,
-  type,
-  onChange,
-  error,
-  disabled,
-  info,
-}) => {
+const TextFieldGroup = ({ name, label, value, type, onChange, error, disabled, info }) => {
   return (
     <Wrapper>
       <TextField
@@ -25,10 +16,7 @@ const TextFieldGroup = ({
         error={error ? true : false}
         disabled={disabled ? true : false}
       />
-      <FormHelperText
-        style={{ marginTop: '5px', position: 'relative' }}
-        error={error ? true : false}
-      >
+      <FormHelperText style={{ marginTop: '5px', position: 'relative' }} error={error ? true : false}>
         {error ? error : info}
       </FormHelperText>
     </Wrapper>

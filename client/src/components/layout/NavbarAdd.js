@@ -1,15 +1,9 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import {
-  toggleFavorite,
-  setSelectedContact,
-} from '../../actions/contactActions'
-import { ReactComponent as Star } from '../../img/icons/star.svg'
 import { ReactComponent as LeftArrow } from '../../img/icons/left-arrow.svg'
 
-class NavbarAdd extends Component {
+export default class NavbarAdd extends Component {
   render() {
     return (
       <NavbarWrapper>
@@ -24,15 +18,6 @@ class NavbarAdd extends Component {
     )
   }
 }
-
-const mapStateToProps = state => ({
-  contacts: state.contacts,
-})
-
-export default connect(
-  mapStateToProps,
-  { setSelectedContact }
-)(NavbarAdd)
 
 const NavbarWrapper = styled.div`
   display: flex;
@@ -64,26 +49,6 @@ const LinkStyled = styled(Link)`
   z-index: 1;
   :hover {
     opacity: 0.8;
-  }
-`
-const ToggleFavorite = styled.span`
-  margin-bottom: -10px;
-`
-const StarStyled = styled(Star)`
-  cursor: pointer;
-  width: 30px;
-  height: 30px;
-  stroke: #ccc;
-  padding: 5px;
-  border-radius: 50px;
-  fill: ${props =>
-    props.style.isFavorite === true ? 'rgb(244,	178, 22)' : '#ccc'};
-  transition: all ease-in-out 200ms;
-  :hover {
-    background-color: rgba(0, 0, 0, 0.03);
-  }
-  :active {
-    transform: scale(0.8);
   }
 `
 const Title = styled.h1`
