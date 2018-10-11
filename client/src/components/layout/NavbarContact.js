@@ -15,13 +15,13 @@ class Navbar extends Component {
     this.props.toggleFavorite(this.props.contacts.selectedContact._id)
   }
 
-  componentDidMount() {
-    const selectedContact = JSON.parse(localStorage.getItem('selectedContact'))
-    this.props.setSelectedContact({
-      ...selectedContact,
-      isFavorite: !selectedContact.isFavorite,
-    })
-  }
+  // componentDidMount() {
+  //   const selectedContact = JSON.parse(localStorage.getItem('selectedContact'))
+  //   this.props.setSelectedContact({
+  //     ...selectedContact,
+  //     isFavorite: !selectedContact.isFavorite,
+  //   })
+  // }
 
   render() {
     const { selectedContact } = this.props.contacts
