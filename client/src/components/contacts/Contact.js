@@ -144,7 +144,7 @@ const ContactName = styled.h1`
 `
 const CompanyName = styled.h2`
   margin-bottom: 25px;
-  color: rgba(0, 0, 0, 0.3);
+  color: rgba(0, 0, 0, 0.5);
   font-weight: 200;
   font-size: 16px;
   opacity: 0;
