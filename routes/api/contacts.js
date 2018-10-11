@@ -72,9 +72,7 @@ router.post('/favorite/:contact_id', (req, res) => {
   const errors = {}
   Contact.findOne({ _id: req.params.contact_id })
     .then(contact => {
-      contact.updateOne({ isFavorite: !contact.isFavorite }, () =>
-        res.json(contact)
-      )
+      contact.updateOne({ isFavorite: !contact.isFavorite }, () => res.json(contact))
     })
     .catch(err => {
       errors.findcontact = 'Contact not found'
@@ -93,10 +91,8 @@ router.get('/api/contacts/populate', (req, res) => {
         name: 'Winnie-the-Pooh',
         companyName: 'Honey Bear, Inc',
         isFavorite: false,
-        smallImageURL:
-          'https://s3.amazonaws.com/technical-challenge/v3/images/winnie-the-pooh-small.jpg',
-        largeImageURL:
-          'https://s3.amazonaws.com/technical-challenge/v3/images/winnie-the-pooh-large.jpg',
+        smallImageURL: 'https://s3.amazonaws.com/technical-challenge/v3/images/winnie-the-pooh-small.jpg',
+        largeImageURL: 'https://s3.amazonaws.com/technical-challenge/v3/images/winnie-the-pooh-large.jpg',
         emailAddress: 'Winnie.the.Pooh@honeybearinc.com',
         birthdate: '1988-07-24',
         phone: {
