@@ -17,7 +17,7 @@ class ContactList extends Component {
   displayFavoriteContacts = () => {
     const favoriteContacts = this.props.contacts.favoriteContacts
     return favoriteContacts.map((contact, i) => (
-      <Link to="/contact" key={i}>
+      <Link to={`/contact/${contact._id}`} key={i}>
         <ContactItem
           favorite={true}
           contact={contact}
@@ -33,7 +33,7 @@ class ContactList extends Component {
     const otherContacts = this.props.contacts.otherContacts
 
     return otherContacts.map((contact, i) => (
-      <Link to="/contact" key={i}>
+      <Link to={`/contact/${contact._id}`} key={i}>
         <ContactItem
           contact={contact}
           i={i}

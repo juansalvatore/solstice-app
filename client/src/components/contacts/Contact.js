@@ -3,90 +3,98 @@ import { connect } from 'react-redux'
 import { getSelectedContact } from '../../actions/contactActions'
 import styled, { keyframes } from 'styled-components'
 import ContactListItem from '../common/ContactListItem'
-
+import { isEmpty } from 'lodash'
 import posed from 'react-pose'
 
 class Contact extends Component {
-  state = {
-    load: true,
-  }
   componentDidMount() {
-    this.setState({ load: false })
+    if (this.props.match.params.id) {
+      console.log(this.props.match.params.id)
+      this.props.getSelectedContact(this.props.match.params.id)
+    }
   }
 
   render() {
-    const selectedContact = JSON.parse(localStorage.getItem('selectedContact'))
+    // const selectedContact = JSON.parse(localStorage.getItem('selectedContact'))
+    const { selectedContact } = this.props.contacts
+    console.log(isEmpty(selectedContact))
+    let contactContent
+    if (isEmpty(selectedContact)) {
+      contactContent = <div>test</div>
+    } else {
+      const adressString = `${selectedContact.address.city}, ${
+        selectedContact.address.state
+      }, ${selectedContact.address.zipCode}, ${selectedContact.address.country}`
 
-    const adressString = `${selectedContact.address.city}, ${
-      selectedContact.address.state
-    }, ${selectedContact.address.zipCode}, ${selectedContact.address.country}`
+      const adress = (
+        <div>
+          {selectedContact.address.street}
+          <br />
+          {adressString}
+        </div>
+      )
+      contactContent = (
+        <ContactWrapper>
+          <Image
+            src={selectedContact.largeImageURL}
+            onError={e => {
+              e.target.onerror = null
+              e.target.src =
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS66z4PSz1ji0ZFAC5nheeYNnTPielTFlpmiWqwSAmCoUT3GJPc'
+            }}
+          />
 
-    const adress = (
-      <div>
-        {selectedContact.address.street}
-        <br />
-        {adressString}
-      </div>
-    )
-
-    return (
-      <ContactWrapper>
-        <Image
-          src={selectedContact.largeImageURL}
-          onError={e => {
-            e.target.onerror = null
-            e.target.src =
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS66z4PSz1ji0ZFAC5nheeYNnTPielTFlpmiWqwSAmCoUT3GJPc'
-          }}
-        />
-
-        <ContactName>{selectedContact.name}</ContactName>
-        <CompanyName>{selectedContact.companyName}</CompanyName>
-        <ListWrapperStyled pose={this.state.load ? 'closed' : 'open'}>
-          <Item>
-            <ContactListItem
-              title="phone:"
-              data={selectedContact.phone.home}
-              phoneType="Home"
-            />
-          </Item>
-          <Item>
-            <ContactListItem
-              title="phone:"
-              data={selectedContact.phone.mobile}
-              phoneType="Mobile"
-            />
-          </Item>
-          <Item>
-            <ContactListItem
-              title="phone:"
-              data={selectedContact.phone.work}
-              phoneType="Work"
-            />
-          </Item>
-          <Item>
-            <ContactListItem title="adress:" data={adress} />
-          </Item>
-          <Item>
-            <ContactListItem
-              title="birthdate:"
-              data={selectedContact.birthdate}
-            />
-          </Item>
-          <Item>
-            <ContactListItem
-              title="email:"
-              data={selectedContact.emailAddress}
-            />
-          </Item>
-        </ListWrapperStyled>
-      </ContactWrapper>
-    )
+          <ContactName>{selectedContact.name}</ContactName>
+          <CompanyName>{selectedContact.companyName}</CompanyName>
+          <ListWrapperStyled
+            pose={this.props.contacts.isLoading ? 'closed' : 'open'}
+          >
+            <Item>
+              <ContactListItem
+                title="phone:"
+                data={selectedContact.phone.home}
+                phoneType="Home"
+              />
+            </Item>
+            <Item>
+              <ContactListItem
+                title="phone:"
+                data={selectedContact.phone.mobile}
+                phoneType="Mobile"
+              />
+            </Item>
+            <Item>
+              <ContactListItem
+                title="phone:"
+                data={selectedContact.phone.work}
+                phoneType="Work"
+              />
+            </Item>
+            <Item>
+              <ContactListItem title="adress:" data={adress} />
+            </Item>
+            <Item>
+              <ContactListItem
+                title="birthdate:"
+                data={selectedContact.birthdate}
+              />
+            </Item>
+            <Item>
+              <ContactListItem
+                title="email:"
+                data={selectedContact.emailAddress}
+              />
+            </Item>
+          </ListWrapperStyled>
+        </ContactWrapper>
+      )
+    }
+    return <div>{contactContent}</div>
   }
 }
 
 const mapStateToProps = state => ({
-  selectedContact: state.contacts.selectedContact,
+  contacts: state.contacts,
 })
 
 export default connect(
