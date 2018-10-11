@@ -8,6 +8,7 @@ import {
 } from '../../actions/contactActions'
 import { ReactComponent as Star } from '../../img/icons/star.svg'
 import { ReactComponent as LeftArrow } from '../../img/icons/left-arrow.svg'
+import { isEmpty } from 'lodash'
 
 class Navbar extends Component {
   handleClick = () => {
@@ -23,6 +24,22 @@ class Navbar extends Component {
   }
 
   render() {
+    const { selectedContact } = this.props.contacts
+    let starToggle
+    if (isEmpty(selectedContact)) {
+      starToggle = <div />
+    } else {
+      starToggle = (
+        <ToggleFavorite onClick={() => this.handleClick()}>
+          <StarStyled
+            style={{
+              isFavorite: selectedContact.isFavorite,
+            }}
+          />
+        </ToggleFavorite>
+      )
+    }
+
     return (
       <NavbarWrapper>
         <ContactNavWrapper>
@@ -30,15 +47,7 @@ class Navbar extends Component {
             <LeftArrowStyled />
             Contacts
           </LinkStyled>
-          <ToggleFavorite onClick={() => this.handleClick()}>
-            {this.props.contacts.selectedContact ? (
-              <StarStyled
-                style={{
-                  isFavorite: this.props.contacts.selectedContact.isFavorite,
-                }}
-              />
-            ) : null}
-          </ToggleFavorite>
+          {starToggle}
         </ContactNavWrapper>
       </NavbarWrapper>
     )
