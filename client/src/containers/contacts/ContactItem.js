@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Line from '../common/Line'
+import Line from '../../components/common/Line'
 import PropTypes from 'prop-types'
 
 const ContactItem = ({ contact, i, data, favorite, selectContact }) => {

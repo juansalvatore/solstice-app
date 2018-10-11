@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { createContact } from '../../actions/contactActions'
 import PropTypes from 'prop-types'
-import TextFieldGroup from '../common/TextFieldGroup'
+import TextFieldGroup from '../../components/common/TextFieldGroup'
 import styled from 'styled-components'
 import { Button } from '@material-ui/core'
 

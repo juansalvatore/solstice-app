@@ -7,9 +7,9 @@ import store from './store'
 import NavbarContact from './containers/layout/NavbarContact'
 import NavbarHome from './components/layout/NavbarHome'
 import NavbarAdd from './components/layout/NavbarAdd'
-import ContactList from './components/contacts/ContactList'
-import Contact from './components/contacts/Contact'
-import CreateContact from './components/create-contact/CreateContact'
+import ContactList from './containers/contacts/ContactList'
+import Contact from './containers/contacts/Contact'
+import CreateContact from './containers/create-contact/CreateContact'
 
 class App extends Component {
   render() {
