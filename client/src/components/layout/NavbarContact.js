@@ -15,14 +15,6 @@ class Navbar extends Component {
     this.props.toggleFavorite(this.props.contacts.selectedContact._id)
   }
 
-  // componentDidMount() {
-  //   const selectedContact = JSON.parse(localStorage.getItem('selectedContact'))
-  //   this.props.setSelectedContact({
-  //     ...selectedContact,
-  //     isFavorite: !selectedContact.isFavorite,
-  //   })
-  // }
-
   render() {
     const { selectedContact } = this.props.contacts
     let starToggle
@@ -114,11 +106,4 @@ const StarStyled = styled(Star)`
   :active {
     transform: scale(0.8);
   }
-`
-const Title = styled.h1`
-  position: absolute;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  font-size: 18px;
 `

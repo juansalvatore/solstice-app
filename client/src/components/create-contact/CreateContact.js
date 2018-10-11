@@ -24,6 +24,9 @@ class AddContact extends Component {
     mobile: '',
     errors: {},
   }
+  componentWillMount() {
+    window.scrollTo(0, 0)
+  }
 
   componentWillReceiveProps = nextProps => {
     if (nextProps.errors) {

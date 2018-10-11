@@ -118,6 +118,7 @@ const ContactListWrapper = styled.div`
   max-width: 900px;
   position: relative;
   left: 50%;
+  padding-bottom: 30px;
   transform: translateX(-50%);
 `
 

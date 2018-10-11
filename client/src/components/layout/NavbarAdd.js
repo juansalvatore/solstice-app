@@ -10,14 +10,6 @@ import { ReactComponent as Star } from '../../img/icons/star.svg'
 import { ReactComponent as LeftArrow } from '../../img/icons/left-arrow.svg'
 
 class NavbarAdd extends Component {
-  // componentDidMount() {
-  //   const selectedContact = JSON.parse(localStorage.getItem('selectedContact'))
-  //   this.props.setSelectedContact({
-  //     ...selectedContact,
-  //     isFavorite: !selectedContact.isFavorite,
-  //   })
-  // }
-
   render() {
     return (
       <NavbarWrapper>
@@ -26,7 +18,7 @@ class NavbarAdd extends Component {
             <LeftArrowStyled />
             Contacts
           </LinkStyled>
-          <Title>Add user</Title>
+          <Title>Add contact</Title>
         </ContactNavWrapper>
       </NavbarWrapper>
     )
