@@ -20,7 +20,7 @@ class Contact extends Component {
     console.log(isEmpty(selectedContact))
     let contactContent
     if (isEmpty(selectedContact)) {
-      contactContent = <div>test</div>
+      contactContent = <div />
     } else {
       const adressString = `${selectedContact.address.city}, ${
         selectedContact.address.state

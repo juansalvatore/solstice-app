@@ -19,10 +19,14 @@ class App extends Component {
           <div>
             <Route exact path="/" component={NavbarHome} />
             <Route exact path="/" component={ContactList} />
-            <Route exact path="/contact/:id" component={NavbarContact} />
-            <Route exact path="/contact/:id" component={Contact} />
             <Route exact path="/contact/add" component={NavbarAdd} />
             <Route exact path="/contact/add" component={CreateContact} />
+            <Route
+              exact
+              path="/contact/profile/:id"
+              component={NavbarContact}
+            />
+            <Route exact path="/contact/profile/:id" component={Contact} />
           </div>
         </Router>
       </Provider>
