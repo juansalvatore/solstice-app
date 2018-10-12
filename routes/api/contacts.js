@@ -9,7 +9,7 @@ const validateContactInput = require('../../validation/contact')
 router.get('/test', (req, res) => res.json({ test: 'Contacts work' }))
 
 // @route   GET api/contacts/:id
-// @desc    Get all contacts
+// @desc    Get specific contact
 // @access  Public
 router.get('/:id', (req, res) => {
   Contact.findOne({ _id: req.params.id })
@@ -18,7 +18,7 @@ router.get('/:id', (req, res) => {
 })
 
 // @route   GET api/contacts
-// @desc    Get specific contact
+// @desc    Get all contacts
 // @access  Public
 router.get('/', (req, res) => {
   Contact.find({})
@@ -27,7 +27,7 @@ router.get('/', (req, res) => {
 })
 
 // @route   POST api/contacts
-// @desc    Create Post
+// @desc    Create a contact
 // @access  Public
 router.post('/', (req, res) => {
   const { errors, isValid } = validateContactInput(req.body)
@@ -78,38 +78,6 @@ router.post('/favorite/:contact_id', (req, res) => {
       errors.findcontact = 'Contact not found'
       res.status(404).json(err)
     })
-})
-
-// @route   POST api/contacts/populate
-// @desc    Seed database
-// @access  Public
-router.get('/api/contacts/populate', (req, res) => {
-  Contact.find({})
-    .removeAsync()
-    .then(() =>
-      Contact.create({
-        name: 'Winnie-the-Pooh',
-        companyName: 'Honey Bear, Inc',
-        isFavorite: false,
-        smallImageURL: 'https://s3.amazonaws.com/technical-challenge/v3/images/winnie-the-pooh-small.jpg',
-        largeImageURL: 'https://s3.amazonaws.com/technical-challenge/v3/images/winnie-the-pooh-large.jpg',
-        emailAddress: 'Winnie.the.Pooh@honeybearinc.com',
-        birthdate: '1988-07-24',
-        phone: {
-          home: '808-949-8253',
-        },
-        address: {
-          street: '933 Wiliwili St',
-          city: 'Honolulu',
-          state: 'HI',
-          country: 'US',
-          zipCode: '96826',
-        },
-      })
-        .save()
-        .then(contact => res.json(contact))
-        .catch(err => res.json(err))
-    )
 })
 
 module.exports = router
