@@ -37,16 +37,16 @@ You can replace the mongoURI with your own mongodb uri.
 
 ### Contacts
 
-Get all contacts:
+- Get all contacts:
 `GET api/contacts`
 
-Get a specific contact:
+- Get a specific contact:
 `GET api/contacts/:id`
 
-Create a contact: 
+- Create a contact: 
 `POST api/contacts`
 
-Toggle favorite:
+- Toggle favorite:
 `POST api/contacts/favorite/:id`
 
 ## Instructions 
