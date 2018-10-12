@@ -28,6 +28,7 @@ You can replace the mongoURI with your own mongodb uri.
 
 - After that you should run `npm run dev` and it will run the react app in *localhost:3000* and the api in *localhost:5000*
 
+- To use the Redux developers tools uncomment line 15 on *./client/src/store.js* 
 
 ## API Routes 
 
@@ -44,3 +45,7 @@ Create a contact:
 
 Toggle favorite:
 `POST api/contacts/favorite/:id`
+
+## License
+
+MIT © **[`Juan Salvatore`](http://juansalvatore.com)**
