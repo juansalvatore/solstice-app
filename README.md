@@ -3,7 +3,7 @@
 This is my solution to <a href="https://www.solstice.com/">Solstice</a>'s 2018 coding challenge.
 
 
-## Tech
+## Technologies used
 
 - [Reactjs](https://reactjs.org/) - JavaScript library for building user interfaces
 - [Redux](https://redux.js.org/) - Predictable state container for JavaScript apps
