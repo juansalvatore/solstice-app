@@ -1,5 +1,5 @@
 import { GET_CONTACTS, CONTACTS_LOADING, GET_SELECTED_CONTACT, TOGGLE_FAVORITE, SET_CONTACTS } from '../actions/types'
-import { filter, orderBy, isEmpty } from 'lodash'
+import { filter, orderBy } from 'lodash'
 
 const initialState = {
   favoriteContacts: [],
@@ -17,8 +17,6 @@ export default (state = initialState, action) => {
       return {
         favoriteContacts: [...favoriteContacts],
         otherContacts: [...otherContacts],
-        isFavoriteContactsEmpty: isEmpty(favoriteContacts),
-        isOtherContactsEmpty: isEmpty(otherContacts),
         isLoading: false,
       }
 
