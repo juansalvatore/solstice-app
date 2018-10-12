@@ -15,13 +15,13 @@ This is my solution to <a href="https://www.solstice.com/">Solstice</a>'s 2018 c
 
 ## How to run the project locally
 
-- Clone the repository
+1. Clone the repository
 
-- Install client and server dependencies by running `cd solstice-app` and then `npm run dependencies`
+2. Install client and server dependencies by running `cd solstice-app` and then `npm run dependencies`
 
-- Now you should create a new file called **keys_dev.js** inside the folder **./config** 
+3. Now you should create a new file called **keys_dev.js** inside the folder **./config** 
 
-- Inside this file paste this code:
+4. Inside this file paste this code:
 ```
 module.exports = {
   mongoURI: 'mongodb://localhost:27017/solstice',
@@ -29,9 +29,9 @@ module.exports = {
 ```
 You can replace the mongoURI with your own mongodb uri.
 
-- After that you should run `npm run dev` and it will run the react app in *localhost:3000* and the api in *localhost:5000*
+5. After that you should run `npm run dev` and it will run the react app in *localhost:3000* and the api in *localhost:5000*
 
-- To use the Redux developers tools uncomment *line 15* on *./client/src/store.js* 
+(To use the Redux developers tools uncomment *line 15* on *./client/src/store.js*)
 
 ## API Routes 
 
