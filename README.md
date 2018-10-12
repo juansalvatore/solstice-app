@@ -49,7 +49,7 @@ You can replace the mongoURI with your own mongodb uri.
 - Toggle favorite:
 `POST api/contacts/favorite/:id`
 
-## Instructions 
+## Challenge's Instructions
 
 ### Contacts List View
 
